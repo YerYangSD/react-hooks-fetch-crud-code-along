@@ -13,6 +13,11 @@ function ShoppingList() {
       .then(data => setItems(data))
   }, [])
 
+  function handleDeletedItem(deletedItem) {
+    const updatedItems = items.filter((item) => item.id !== deletedItem.id)
+    setItems(updatedItems)
+  }
+
   function handleUpdatedItem(updatedItem) {
     const updatedItems = items.map((item) => {
       if (item.id === updatedItem.id) {
@@ -47,7 +52,7 @@ function ShoppingList() {
       />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
-          <Item key={item.id} item={item} onUpdatedItem={handleUpdatedItem} />
+          <Item key={item.id} item={item} onUpdatedItem={handleUpdatedItem} onDeletedItem={handleDeletedItem} />
         ))}
       </ul>
     </div>
